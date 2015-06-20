@@ -145,7 +145,7 @@
 				clickTime=d.getTime();
 			}
 			responseTimeArray.push((clickTime-showTime)/1000);
-			if (responseTimeArray.length == 6) {
+			if (responseTimeArray.length == 10) {
 				for (var z=0;z<responseTimeArray.length;z++){
 					console.log(responseTimeArray[z]);
 				}
@@ -155,7 +155,7 @@
 				document.getElementById("box-2").style.visibility="hidden";
 				document.getElementById("box-3").style.visibility="hidden";
 				document.getElementById("box-4").style.visibility="hidden";
-				document.getElementById("score").innerHTML = "  Average Response Time  =  " + avgResp;
+				document.getElementById("score").innerHTML = "  Average Response Time  =  " + avgResp.toPrecision(5);
 			} else {
 				hideBox();
 			}
@@ -169,7 +169,7 @@
 			setTimeout(showBox, delay);
 		}
 		function showBox() {
-			bx=Math.floor(Math.random()*3)+1;
+			bx=Math.floor(Math.random()*4)+1;
 			bxStr="box-"+bx;
 			document.getElementById("demo").innerHTML = bxStr;
 			document.getElementById(bxStr).style.visibility="visible";
@@ -181,7 +181,7 @@
 			for (var z=1;z<responseTimeArray.length;z++) {
 				avg=avg+responseTimeArray[z];
 			}
-			avg=avg/responseTimeArray.length-1;
+			avg=avg/(responseTimeArray.length - 1);
 			return(avg);
 		}
 	</script>
