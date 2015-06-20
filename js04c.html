@@ -20,38 +20,22 @@
         background-color: #fff;
         border-radius: 1em;
     }
-    #box-1 {
+	level1Box {
         width: 200px;
         height: 200px;
         background-color: red;
 		visibility:visible;
 		float: left;
 		margin:0px;
-    }
-    #box-2 {
-        width: 200px;
-        height: 200px;
+	}
+	level2Box {
+        width: 100px;
+        height: 100px;
         background-color: red;
 		visibility:visible;
 		float: left;
 		margin:0px;
-    }
-    #box-3 {
-        width: 200px;
-        height: 200px;
-        background-color: red;
-		visibility:visible;
-		float: left;
-		margin:0px;
-    }
-    #box-4 {
-        width: 200px;
-        height: 200px;
-        background-color: red;
-		visibility:visible;
-		float: left;
-		margin:0px;
-    }
+	}
 	.box1 {
         width: 190px;
         height: 40px;
@@ -101,6 +85,9 @@
 	#level1Div {
 		display:none;
 	}
+	#level2Div {
+		display:none;
+	}
 	#scoreDiv {
 		display:none;
 		height: 100px;
@@ -115,8 +102,16 @@
 		</div>
 		<div id="level1Div">
 			<table>
-			<tr><td><div id="box-1"></div></td><td><div id="box-2"></div></td></tr>
-			<tr><td><div id="box-3"></div></td><td><div id="box-4"></div></td></tr>
+			<tr><td><level1Box id="box-1"></div></td><td><level1Box id="box-2"></div></td></tr>
+			<tr><td><level1Box id="box-3"></div></td><td><level1Box id="box-4"></div></td></tr>
+			</table>
+		</div>
+		<div id="level2Div">
+			<table>
+			<tr><td><level2Box id="box-1"></div></td><td><level2Box id="box-2"></div></td><td><level2Box id="box-3"></div></td><td><level2Box id="box-4"></div></td></tr>
+			<tr><td><level2Box id="box-5"></div></td><td><level2Box id="box-6"></div></td><td><level2Box id="box-7"></div></td><td><level2Box id="box-8"></div></td></tr>
+			<tr><td><level2Box id="box-9"></div></td><td><level2Box id="box-10"></div></td><td><level2Box id="box-11"></div></td><td><level2Box id="box-12"></div></td></tr>
+			<tr><td><level2Box id="box-13"></div></td><td><level2Box id="box-14"></div></td><td><level2Box id="box-15"></div></td><td><level2Box id="box-16"></div></td></tr>
 			</table>
 		</div>
 		<div id="scoreDiv">
@@ -148,10 +143,10 @@
 		}
 
 		var delay=0; showTime=0, clickTime=0;
-		document.getElementById("box-1").onclick=boxClicked;
-		document.getElementById("box-2").onclick=boxClicked;
-		document.getElementById("box-3").onclick=boxClicked;
-		document.getElementById("box-4").onclick=boxClicked;
+		for (var lvlInd=1; lvlInd < 5; lvlInd++) {
+			boxId="box-"+lvlInd;
+			document.getElementById(boxId).onclick=boxClicked;
+		}
 		function boxClicked() {
 			if (clickTime==0) {
 				//this is the first click
@@ -161,26 +156,26 @@
 				clickTime=d.getTime();
 			}
 			responseTimeArray.push((clickTime-showTime)/1000);
-			if (responseTimeArray.length == 2) {
+			if (responseTimeArray.length == 5) {
 				for (var z=0;z<responseTimeArray.length;z++){
 					console.log(responseTimeArray[z]);
 				}
 				var avgResp = avgRespTime();
 				document.getElementById("demo").innerHTML = "Game Over!";
-				document.getElementById("box-1").style.visibility="hidden";
-				document.getElementById("box-2").style.visibility="hidden";
-				document.getElementById("box-3").style.visibility="hidden";
-				document.getElementById("box-4").style.visibility="hidden";
+				for (var lvlInd=1; lvlInd < 5; lvlInd++) {
+					boxId="box-"+lvlInd;
+					document.getElementById(boxId).style.visibility="hidden";
+				}
 				document.getElementById("score").innerHTML = "  Average Response Time  =  " + avgResp.toPrecision(5);
 			} else {
 				hideBox();
 			}
 		}
 		function hideBox() {
-			document.getElementById("box-1").style.visibility="hidden";
-			document.getElementById("box-2").style.visibility="hidden";
-			document.getElementById("box-3").style.visibility="hidden";
-			document.getElementById("box-4").style.visibility="hidden";
+			for (var lvlInd=1; lvlInd < 5; lvlInd++) {
+				boxId="box-"+lvlInd;
+				document.getElementById(boxId).style.visibility="hidden";
+			}
 			delay=Math.floor(Math.random()*5000);
 			setTimeout(showBox, delay);
 		}
