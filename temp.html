@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-    <title>Learning Javascript</title>
+    <title>Insert Cells</title>
 
     <meta charset="utf-8" />
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
@@ -12,292 +12,65 @@
         margin: 0;
         padding: 0;
         font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        
     }
     div {
-        width: 625px;
-		height: 550px;
-        margin: 1em auto;
+        width: 300px;
+        height: 30px;
+        margin: 5em auto;
+        padding: 50px;
         background-color: #fff;
         border-radius: 1em;
     }
-	l1Bx {
-        width: 200px;
-        height: 200px;
-        background-color: red;
-		visibility:visible;
-		float: left;
-		margin:0px;
-	}
-	l2Bx {
-        width: 100px;
-        height: 100px;
-        background-color: red;
-		visibility:visible;
-		float: left;
-		margin:0px;
-	}
-	l3Bx {
-        width: 50px;
-        height: 50px;
-        background-color: red;
-		visibility:visible;
-		float: left;
-		margin:0px;
-	}
-	l4Bx {
+    .one {
+        height: 300px;
+    }
+    table, td {
+    border: 1px solid black;
+    }
+    .l1Bx {
         width: 25px;
         height: 25px;
         background-color: red;
-		visibility:visible;
-		float: left;
-		margin:0px;
-	}
-	l5Bx {
+    }
+    .l2Bx {
         width: 12.5px;
         height: 12.5px;
-        background-color: red;
-		visibility:visible;
-		float: left;
-		margin:0px;
-	}
-	.box1 {
-        width: 190px;
-        height: 40px;
-        margin: 5px 5px 0 11px;
-        padding-left: 100px;
-        background-color: pink;
-		visibility:visible;
-		float: left;
-	}
-	.box2 {
-        width: 610px;
-        height: 40px;
-        margin: 5px 5px 0 5px;
-        background-color: lime;
-		color: white;
-		visibility:visible;
-		float: left;
-		align: center;
-	}
-	#clock {
-		align:center;
-		position:relative;
-		top: -6px;
-		vertical-align: super;
-	}
-	#demo {
-		position: relative;
-		top: -6px;
-		right: 60px;
-		text-align:center;
-	}
-	#score {
-		position: relative;
-		top: -6px;
-		text-align:center;
-	}
-	div table{
-		padding: 70px 0 0 0;
-		margin: 5em auto;
-	}
-	div tr {
-		padding: 0px;
-		margin: 0;
-	}
-	#instrDiv {
-	}
-	#level1Div {
-		display:none;
-	}
-	#level2Div {
-		display:none;
-	}
-	#level3Div {
-		display:none;
-	}
-	#level4Div {
-		display:none;
-	}
-	#level5Div {
-		display:none;
-	}
-	#scoreDiv {
-		display:none;
-		height: 100px;
-	}
+        background-color: green;
+    }
+
     </style>    
 </head>
 
 <body>
-	<div id="containerDiv">
-		<div id="instrDiv">
-			<p>
-				<input id="playLevel" "type="text" placeholder="1-4" />
-				<button id="playGame">Lets start</button></p>
-		</div>
-		<div id="level1Div">
-			<table>
-			<tr><td><l1Bx id="b1-1"></div></td><td><l1Bx id="b1-2"></div></td></tr>
-			<tr><td><l1Bx id="b1-3"></div></td><td><l1Bx id="b1-4"></div></td></tr>
-			</table>
-		</div>
-		<div id="level2Div">
-			<table>
-			<tr><td><l2Bx id="b2-1"></div></td><td><l2Bx id="b2-2"></div></td><td><l2Bx id="b2-3"></div></td><td><l2Bx id="b2-4"></div></td></tr>
-			<tr><td><l2Bx id="b2-5"></div></td><td><l2Bx id="b2-6"></div></td><td><l2Bx id="b2-7"></div></td><td><l2Bx id="b2-8"></div></td></tr>
-			<tr><td><l2Bx id="b2-9"></div></td><td><l2Bx id="b2-10"></div></td><td><l2Bx id="b2-11"></div></td><td><l2Bx id="b2-12"></div></td></tr>
-			<tr><td><l2Bx id="b2-13"></div></td><td><l2Bx id="b2-14"></div></td><td><l2Bx id="b2-15"></div></td><td><l2Bx id="b2-16"></div></td></tr>
-			</table>
-		</div>
-		<div id="level3Div">
-			<table>
-			<tr><td><l3Bx id="b3-1"></div></td><td><l3Bx id="b3-2"></div></td><td><l3Bx id="b3-3"></div></td><td><l3Bx id="b3-4"></div></td>
-			    <td><l3Bx id="b3-5"></div></td><td><l3Bx id="b3-6"></div></td><td><l3Bx id="b3-7"></div></td><td><l3Bx id="b3-8"></div></td></tr>
-			<tr><td><l3Bx id="b3-9"></div></td><td><l3Bx id="b3-10"></div></td><td><l3Bx id="b3-11"></div></td><td><l3Bx id="b3-12"></div></td>
-			    <td><l3Bx id="b3-13"></div></td><td><l3Bx id="b3-14"></div></td><td><l3Bx id="b3-15"></div></td><td><l3Bx id="b3-16"></div></td></tr>
-			<tr><td><l3Bx id="b3-17"></div></td><td><l3Bx id="b3-18"></div></td><td><l3Bx id="b3-19"></div></td><td><l3Bx id="b3-20"></div></td>
-			    <td><l3Bx id="b3-21"></div></td><td><l3Bx id="b3-22"></div></td><td><l3Bx id="b3-23"></div></td><td><l3Bx id="b3-24"></div></td></tr>
-			<tr><td><l3Bx id="b3-25"></div></td><td><l3Bx id="b3-26"></div></td><td><l3Bx id="b3-27"></div></td><td><l3Bx id="b3-28"></div></td>
-			    <td><l3Bx id="b3-29"></div></td><td><l3Bx id="b3-30"></div></td><td><l3Bx id="b3-31"></div></td><td><l3Bx id="b3-32"></div></td></tr>
-			<tr><td><l3Bx id="b3-33"></div></td><td><l3Bx id="b3-34"></div></td><td><l3Bx id="b3-35"></div></td><td><l3Bx id="b3-36"></div></td>
-			    <td><l3Bx id="b3-37"></div></td><td><l3Bx id="b3-38"></div></td><td><l3Bx id="b3-39"></div></td><td><l3Bx id="b3-40"></div></td></tr>
-			<tr><td><l3Bx id="b3-41"></div></td><td><l3Bx id="b3-42"></div></td><td><l3Bx id="b3-43"></div></td><td><l3Bx id="b3-44"></div></td>
-			    <td><l3Bx id="b3-45"></div></td><td><l3Bx id="b3-46"></div></td><td><l3Bx id="b3-47"></div></td><td><l3Bx id="b3-48"></div></td></tr>
-			<tr><td><l3Bx id="b3-49"></div></td><td><l3Bx id="b3-50"></div></td><td><l3Bx id="b3-51"></div></td><td><l3Bx id="b3-52"></div></td>
-			    <td><l3Bx id="b3-53"></div></td><td><l3Bx id="b3-54"></div></td><td><l3Bx id="b3-55"></div></td><td><l3Bx id="b3-56"></div></td></tr>
-			<tr><td><l3Bx id="b3-57"></div></td><td><l3Bx id="b3-58"></div></td><td><l3Bx id="b3-59"></div></td><td><l3Bx id="b3-60"></div></td>
-			    <td><l3Bx id="b3-61"></div></td><td><l3Bx id="b3-62"></div></td><td><l3Bx id="b3-63"></div></td><td><l3Bx id="b3-64"></div></td></tr>
-			</table>
-		</div>
-		<div id="level4Div">
-			<table>
-			<tr><td><l4Bx id="b4-1"></div></td><td><l4Bx id="b4-2"></div></td><td><l4Bx id="b4-3"></div></td><td><l4Bx id="b4-4"></div></td>
-			    <td><l4Bx id="b4-5"></div></td><td><l4Bx id="b4-6"></div></td><td><l4Bx id="b4-7"></div></td><td><l4Bx id="b4-8"></div></td>
-				<td><l4Bx id="b4-9"></div></td><td><l4Bx id="b4-10"></div></td><td><l4Bx id="b4-11"></div></td><td><l4Bx id="b4-12"></div></td>
-			    <td><l4Bx id="b4-13"></div></td><td><l4Bx id="b4-14"></div></td><td><l4Bx id="b4-15"></div></td><td><l4Bx id="b4-16"></div></td></tr>
-			<tr><td><l4Bx id="b4-17"></div></td><td><l4Bx id="b4-18"></div></td><td><l4Bx id="b4-19"></div></td><td><l4Bx id="b4-20"></div></td>
-			    <td><l4Bx id="b4-21"></div></td><td><l4Bx id="b4-22"></div></td><td><l4Bx id="b4-23"></div></td><td><l4Bx id="b4-24"></div></td>
-				<td><l4Bx id="b4-25"></div></td><td><l4Bx id="b4-26"></div></td><td><l4Bx id="b4-27"></div></td><td><l4Bx id="b4-28"></div></td>
-			    <td><l4Bx id="b4-29"></div></td><td><l4Bx id="b4-30"></div></td><td><l4Bx id="b4-31"></div></td><td><l4Bx id="b4-32"></div></td></tr>
-			<tr><td><l4Bx id="b4-33"></div></td><td><l4Bx id="b4-34"></div></td><td><l4Bx id="b4-35"></div></td><td><l4Bx id="b4-36"></div></td>
-			    <td><l4Bx id="b4-37"></div></td><td><l4Bx id="b4-38"></div></td><td><l4Bx id="b4-39"></div></td><td><l4Bx id="b4-40"></div></td>
-				<td><l4Bx id="b4-41"></div></td><td><l4Bx id="b4-42"></div></td><td><l4Bx id="b4-43"></div></td><td><l4Bx id="b4-44"></div></td>
-			    <td><l4Bx id="b4-45"></div></td><td><l4Bx id="b4-46"></div></td><td><l4Bx id="b4-47"></div></td><td><l4Bx id="b4-48"></div></td></tr>
-			<tr><td><l4Bx id="b4-49"></div></td><td><l4Bx id="b4-50"></div></td><td><l4Bx id="b4-51"></div></td><td><l4Bx id="b4-52"></div></td>
-			    <td><l4Bx id="b4-53"></div></td><td><l4Bx id="b4-54"></div></td><td><l4Bx id="b4-55"></div></td><td><l4Bx id="b4-56"></div></td>
-				<td><l4Bx id="b4-57"></div></td><td><l4Bx id="b4-58"></div></td><td><l4Bx id="b4-59"></div></td><td><l4Bx id="b4-60"></div></td>
-			    <td><l4Bx id="b4-61"></div></td><td><l4Bx id="b4-62"></div></td><td><l4Bx id="b4-63"></div></td><td><l4Bx id="b4-64"></div></td></tr>
-			<tr><td><l4Bx id="b4-65"></div></td><td><l4Bx id="b4-66"></div></td><td><l4Bx id="b4-67"></div></td><td><l4Bx id="b4-68"></div></td>
-			    <td><l4Bx id="b4-69"></div></td><td><l4Bx id="b4-70"></div></td><td><l4Bx id="b4-71"></div></td><td><l4Bx id="b4-72"></div></td>
-				<td><l4Bx id="b4-73"></div></td><td><l4Bx id="b4-74"></div></td><td><l4Bx id="b4-75"></div></td><td><l4Bx id="b4-76"></div></td>
-			    <td><l4Bx id="b4-77"></div></td><td><l4Bx id="b4-78"></div></td><td><l4Bx id="b4-79"></div></td><td><l4Bx id="b4-80"></div></td></tr>
-			<tr><td><l4Bx id="b4-81"></div></td><td><l4Bx id="b4-82"></div></td><td><l4Bx id="b4-83"></div></td><td><l4Bx id="b4-84"></div></td>
-			    <td><l4Bx id="b4-85"></div></td><td><l4Bx id="b4-86"></div></td><td><l4Bx id="b4-87"></div></td><td><l4Bx id="b4-88"></div></td>
-				<td><l4Bx id="b4-89"></div></td><td><l4Bx id="b4-90"></div></td><td><l4Bx id="b4-91"></div></td><td><l4Bx id="b4-92"></div></td>
-			    <td><l4Bx id="b4-93"></div></td><td><l4Bx id="b4-94"></div></td><td><l4Bx id="b4-95"></div></td><td><l4Bx id="b4-96"></div></td></tr>
-			<tr><td><l4Bx id="b4-97"></div></td><td><l4Bx id="b4-98"></div></td><td><l4Bx id="b4-99"></div></td><td><l4Bx id="b4-100"></div></td>
-			    <td><l4Bx id="b4-101"></div></td><td><l4Bx id="b4-102"></div></td><td><l4Bx id="b4-103"></div></td><td><l4Bx id="b4-104"></div></td>
-				<td><l4Bx id="b4-105"></div></td><td><l4Bx id="b4-106"></div></td><td><l4Bx id="b4-107"></div></td><td><l4Bx id="b4-108"></div></td>
-			    <td><l4Bx id="b4-109"></div></td><td><l4Bx id="b4-110"></div></td><td><l4Bx id="b4-111"></div></td><td><l4Bx id="b4-112"></div></td></tr>
-			<tr><td><l4Bx id="b4-113"></div></td><td><l4Bx id="b4-114"></div></td><td><l4Bx id="b4-115"></div></td><td><l4Bx id="b4-116"></div></td>
-			    <td><l4Bx id="b4-117"></div></td><td><l4Bx id="b4-118"></div></td><td><l4Bx id="b4-119"></div></td><td><l4Bx id="b4-120"></div></td>
-				<td><l4Bx id="b4-121"></div></td><td><l4Bx id="b4-122"></div></td><td><l4Bx id="b4-123"></div></td><td><l4Bx id="b4-124"></div></td>
-			    <td><l4Bx id="b4-125"></div></td><td><l4Bx id="b4-126"></div></td><td><l4Bx id="b4-127"></div></td><td><l4Bx id="b4-128"></div></td></tr>
-			<tr><td><l4Bx id="b4-129"></div></td><td><l4Bx id="b4-130"></div></td><td><l4Bx id="b4-131"></div></td><td><l4Bx id="b4-132"></div></td>
-			    <td><l4Bx id="b4-133"></div></td><td><l4Bx id="b4-134"></div></td><td><l4Bx id="b4-135"></div></td><td><l4Bx id="b4-136"></div></td>
-				<td><l4Bx id="b4-137"></div></td><td><l4Bx id="b4-138"></div></td><td><l4Bx id="b4-139"></div></td><td><l4Bx id="b4-140"></div></td>
-			    <td><l4Bx id="b4-141"></div></td><td><l4Bx id="b4-142"></div></td><td><l4Bx id="b4-143"></div></td><td><l4Bx id="b4-144"></div></td></tr>
-			<tr><td><l4Bx id="b4-145"></div></td><td><l4Bx id="b4-146"></div></td><td><l4Bx id="b4-147"></div></td><td><l4Bx id="b4-148"></div></td>
-			    <td><l4Bx id="b4-149"></div></td><td><l4Bx id="b4-150"></div></td><td><l4Bx id="b4-151"></div></td><td><l4Bx id="b4-152"></div></td>
-				<td><l4Bx id="b4-153"></div></td><td><l4Bx id="b4-154"></div></td><td><l4Bx id="b4-155"></div></td><td><l4Bx id="b4-156"></div></td>
-			    <td><l4Bx id="b4-157"></div></td><td><l4Bx id="b4-158"></div></td><td><l4Bx id="b4-159"></div></td><td><l4Bx id="b4-160"></div></td></tr>
-			<tr><td><l4Bx id="b4-161"></div></td><td><l4Bx id="b4-162"></div></td><td><l4Bx id="b4-163"></div></td><td><l4Bx id="b4-164"></div></td>
-			    <td><l4Bx id="b4-165"></div></td><td><l4Bx id="b4-166"></div></td><td><l4Bx id="b4-167"></div></td><td><l4Bx id="b4-168"></div></td>
-				<td><l4Bx id="b4-169"></div></td><td><l4Bx id="b4-170"></div></td><td><l4Bx id="b4-171"></div></td><td><l4Bx id="b4-172"></div></td>
-			    <td><l4Bx id="b4-173"></div></td><td><l4Bx id="b4-174"></div></td><td><l4Bx id="b4-175"></div></td><td><l4Bx id="b4-176"></div></td></tr>
-			<tr><td><l4Bx id="b4-177"></div></td><td><l4Bx id="b4-178"></div></td><td><l4Bx id="b4-179"></div></td><td><l4Bx id="b4-180"></div></td>
-			    <td><l4Bx id="b4-181"></div></td><td><l4Bx id="b4-182"></div></td><td><l4Bx id="b4-183"></div></td><td><l4Bx id="b4-184"></div></td>
-				<td><l4Bx id="b4-185"></div></td><td><l4Bx id="b4-186"></div></td><td><l4Bx id="b4-187"></div></td><td><l4Bx id="b4-188"></div></td>
-			    <td><l4Bx id="b4-189"></div></td><td><l4Bx id="b4-190"></div></td><td><l4Bx id="b4-191"></div></td><td><l4Bx id="b4-192"></div></td></tr>
-			<tr><td><l4Bx id="b4-193"></div></td><td><l4Bx id="b4-194"></div></td><td><l4Bx id="b4-195"></div></td><td><l4Bx id="b4-196"></div></td>
-			    <td><l4Bx id="b4-197"></div></td><td><l4Bx id="b4-198"></div></td><td><l4Bx id="b4-199"></div></td><td><l4Bx id="b4-200"></div></td>
-				<td><l4Bx id="b4-201"></div></td><td><l4Bx id="b4-202"></div></td><td><l4Bx id="b4-203"></div></td><td><l4Bx id="b4-204"></div></td>
-			    <td><l4Bx id="b4-205"></div></td><td><l4Bx id="b4-206"></div></td><td><l4Bx id="b4-207"></div></td><td><l4Bx id="b4-208"></div></td></tr>
-			<tr><td><l4Bx id="b4-209"></div></td><td><l4Bx id="b4-210"></div></td><td><l4Bx id="b4-211"></div></td><td><l4Bx id="b4-212"></div></td>
-			    <td><l4Bx id="b4-213"></div></td><td><l4Bx id="b4-214"></div></td><td><l4Bx id="b4-215"></div></td><td><l4Bx id="b4-216"></div></td>
-				<td><l4Bx id="b4-217"></div></td><td><l4Bx id="b4-218"></div></td><td><l4Bx id="b4-219"></div></td><td><l4Bx id="b4-220"></div></td>
-			    <td><l4Bx id="b4-221"></div></td><td><l4Bx id="b4-222"></div></td><td><l4Bx id="b4-223"></div></td><td><l4Bx id="b4-224"></div></td></tr>
-			<tr><td><l4Bx id="b4-225"></div></td><td><l4Bx id="b4-226"></div></td><td><l4Bx id="b4-227"></div></td><td><l4Bx id="b4-228"></div></td>
-			    <td><l4Bx id="b4-229"></div></td><td><l4Bx id="b4-230"></div></td><td><l4Bx id="b4-231"></div></td><td><l4Bx id="b4-232"></div></td>
-				<td><l4Bx id="b4-233"></div></td><td><l4Bx id="b4-234"></div></td><td><l4Bx id="b4-235"></div></td><td><l4Bx id="b4-236"></div></td>
-			    <td><l4Bx id="b4-237"></div></td><td><l4Bx id="b4-238"></div></td><td><l4Bx id="b4-239"></div></td><td><l4Bx id="b4-240"></div></td></tr>
-			<tr><td><l4Bx id="b4-241"></div></td><td><l4Bx id="b4-242"></div></td><td><l4Bx id="b4-243"></div></td><td><l4Bx id="b4-244"></div></td>
-			    <td><l4Bx id="b4-245"></div></td><td><l4Bx id="b4-246"></div></td><td><l4Bx id="b4-247"></div></td><td><l4Bx id="b4-248"></div></td>
-				<td><l4Bx id="b4-249"></div></td><td><l4Bx id="b4-250"></div></td><td><l4Bx id="b4-251"></div></td><td><l4Bx id="b4-252"></div></td>
-			    <td><l4Bx id="b4-253"></div></td><td><l4Bx id="b4-254"></div></td><td><l4Bx id="b4-255"></div></td><td><l4Bx id="b4-256"></div></td></tr>
-			</table>
-		</div>
-		<div id="level5Div">
-			<table id="level5Table">
-			</table>
-		</div>
-		<div id="scoreDiv">
-			<div class="box1"> 
-				<p id="clock"></p>
-			</div>
-			<div class="box1"> 
-				<p id="demo"></p>
-			</div>
-			<div class="box2"> 
-				<p id="score"></p>
-			</div>
-		</div>
-	</div>
-	<script type="text/javascript">
-		var numClicked=0, responseTimeArray = new Array();
-		var myVar=setInterval(function(){myTimer()},1000);
-		var bx=0, bxStr="";
-		var gameLevel="", lv=0;
-		var delay=0; showTime=0, clickTime=0;
-		document.getElementById("playGame").onclick = startGame;
-		function startGame() {
-			lv=document.getElementById("playLevel").value;
-			document.getElementById("instrDiv").style.display="none";
-			gameLevel="level"+lv+"Div";
-			document.getElementById(gameLevel).style.display="block";
-			document.getElementById("scoreDiv").style.display="block";
-			setupTable();
-			for (var lvlInd=1; lvlInd < Math.pow(4,lv)+1; lvlInd++) {
-				document.getElementById("score").innerHTML = "  your level  =  " + lv;
-				boxId="b"+lv+"-"+lvlInd;
-				document.getElementById(boxId).onclick=boxClicked;
-			}
-		}
-		function setupTable() {
-		var counter=0, row=0, cell=0;
-			var tableId=document.getElementById("level5Table");
-			//alert (tableId);
-			for (var r=0; r<Math.pow(2,lv); r++) {
-				row=table.insertRow(r);
-				//alert("inserting row : "+r);
-				for (var c=0; c<Math.pow(2,lv); c++) {
-					counter++;
-					//alert("inserting column : "+r+"-"+c);
-					cell=row.insertCell(c);
-					var cName = "l"+lv+"Bx";
-					var cId = "b"+lv+"-"+counter;
-					cell.setAttribute("class",cName);
-					cell.setAttribute("id",cId);
-				}
-				alert("inserted class = " + this.className);
-			}
-			//alert(this.className);
-		}
+<div class="one">
+    <h1>Example Domain</h1>
+    <table id="myTable">
+    </table>
+    <br>
+</div>
 
+<div>
+<button onclick="myFunction()">Try it</button>
+</div>
+<script>
+function myFunction() {
+    var table = document.getElementById("myTable");
+    insIntoTable(table);
+}
+function insIntoTable(t) {
+    var row = t.insertRow(0);
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
+    //cell1.innerHTML = "NEW CELL1";
+    //cell2.innerHTML = "NEW CELL2";
+    cell1.className='l2Bx';
+    cell2.className='l2Bx';
+}
 // append row to the HTML table
 function appendRow(tableId) {
-    var tbl = document.getElementById(tableId), // table reference
-        row = tbl.insertRow(tbl.rows.length),      // append table row
+    var tbl = document.getElementById(tableId),
+        row = tbl.insertRow(tbl.rows.length),
         i;
     // insert table cells to the new row
     for (i = 0; i < tbl.rows[0].cells.length; i++) {
@@ -307,71 +80,13 @@ function appendRow(tableId) {
  
 // create DIV element and append to the table cell
 function createCell(cell, text, style) {
-    var div = document.createElement('div'), // create DIV element
-        txt = document.createTextNode(text); // create text node
-    div.appendChild(txt);                    // append text node to the DIV
-    div.setAttribute('class', style);        // set DIV class attribute
-    div.setAttribute('className', style);    // set DIV class attribute for IE (?!)
-    cell.appendChild(div);                   // append DIV to the table cell
+    var div = document.createElement('div');
+        txt = document.createTextNode(text);
+    div.appendChild(txt);
+    div.setAttribute('l1Bx', style);
+    cell.appendChild(div);
+    alert ("created " + cell.class);
 }
-		
-		
-
-
-
-		function myTimer() {
-			var d = new Date();
-			document.getElementById("clock").innerHTML = d.toLocaleTimeString();
-		}
-		function boxClicked() {
-			if (clickTime==0) {
-				//this is the first click
-				clickTime = 1;
-			} else {
-				var d = new Date();
-				clickTime=d.getTime();
-			}
-			responseTimeArray.push((clickTime-showTime)/1000);
-			if (responseTimeArray.length == 8) {
-				for (var z=0;z<responseTimeArray.length;z++){
-					console.log(responseTimeArray[z]);
-				}
-				var avgResp = avgRespTime();
-				document.getElementById("demo").innerHTML = "Game Over!";
-				for (var lvlInd=1; lvlInd < Math.pow(4,lv)+1; lvlInd++) {
-					boxId="b"+lv+"-"+lvlInd;
-					document.getElementById(boxId).style.visibility="hidden";
-				}
-				document.getElementById("score").innerHTML = "  Average Response Time  =  " + avgResp.toPrecision(5);
-			} else {
-				hideBox();
-			}
-		}
-		function hideBox() {
-			for (var lvlInd=1; lvlInd < Math.pow(4,lv)+1; lvlInd++) {
-				boxId="b"+lv+"-"+lvlInd;
-				document.getElementById(boxId).style.visibility="hidden";
-			}
-			delay=Math.floor(Math.random()*5000);
-			setTimeout(showBox, delay);
-		}
-		function showBox() {
-			bx=Math.floor(Math.random()*Math.pow(4,lv))+1;
-			bxStr="b"+lv+"-"+bx;
-			document.getElementById("demo").innerHTML = bxStr;
-			document.getElementById(bxStr).style.visibility="visible";
-			var d = new Date();
-			showTime=d.getTime();
-		}
-		function avgRespTime() {
-			var avg=0;
-			for (var z=1;z<responseTimeArray.length;z++) {
-				avg=avg+responseTimeArray[z];
-			}
-			avg=avg/(responseTimeArray.length - 1);
-			return(avg);
-		}
-	</script>
-
+</script>
 </body>
 </html>
