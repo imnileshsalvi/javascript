@@ -15,7 +15,7 @@
         
     }
     div {
-        width: 300px;
+        width: 200px;
         height: 30px;
         margin: 5em auto;
         padding: 50px;
@@ -24,6 +24,11 @@
     }
     .one {
         height: 300px;
+        float:left;
+    }
+    .two {
+        height: 100px;
+        float:left;
     }
     table, td {
     border: 1px solid black;
@@ -44,26 +49,42 @@
 
 <body>
 <div class="one">
-    <h1>Example Domain</h1>
-    <table id="myTable">
+    <h1>Table1</h1>
+    <table id="myTable1">
     </table>
     <br>
 </div>
-
-<div>
-<button onclick="myFunction()">Try it</button>
+<div class="one">
+    <h1>Table2</h1>
+    <table id="myTable2">
+    </table>
+    <br>
+</div>
+<div class="two">
+    <button onclick="myFunction(1)">One</button>
+    <button onclick="myFunction(2)">Two</button>
 </div>
 <script>
-function myFunction() {
-    var table = document.getElementById("myTable");
-    insIntoTable(table);
+function myFunction(n) {
+    if (n==1) {
+        var table = document.getElementById("myTable1");
+        insIntoTable1(table);
+    } else {
+        var table = document.getElementById("myTable2");
+        insIntoTable2(table);
+    }
 }
-function insIntoTable(t) {
+function insIntoTable1(t) {
     var row = t.insertRow(0);
     var cell1 = row.insertCell(0);
     var cell2 = row.insertCell(1);
-    //cell1.innerHTML = "NEW CELL1";
-    //cell2.innerHTML = "NEW CELL2";
+    cell1.className='l1Bx';
+    cell2.className='l1Bx';
+}
+function insIntoTable2(t) {
+    var row = t.insertRow(0);
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
     cell1.className='l2Bx';
     cell2.className='l2Bx';
 }
