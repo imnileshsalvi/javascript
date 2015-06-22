@@ -1,0 +1,255 @@
+<!doctype html>
+<html>
+<head>
+    <title>Superb Game</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style type="text/css">
+    body {
+        background-color: #f0f0f2;
+        margin: 0;
+        padding: 0;
+        font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-weight: bold;
+		color: gray;
+    }
+	div {
+	  width: 800px;
+	  height: 600px;
+	  margin: 1em auto;
+	  padding: 20px;
+	  background-color: #C9E3E4;
+	  border-radius: 1em;
+	}
+	#instrDiv {
+        width: 700px;
+        height: 200px;
+	}
+	#t2 {
+	  display: none;
+	  width: 550px;
+	  height: 550px;
+	  margin: 0.5em auto;
+	  background-color: #F1F2BE;
+	  border-radius: 1em;
+	}
+    .gamediv {
+    }
+    .two {
+        height: 50px;
+        float:left;
+    }
+	.l1Bx {
+	  width: 260px;
+	  height: 260px;
+	  background-color: red;
+	  padding: 5px;
+	}
+	.l2Bx {
+	  width: 100px;
+	  height: 100px;
+	  background-color: red;
+	  padding: 18px;
+	}
+    .l3Bx {
+        width: 65px;
+        height: 65px;
+        background-color: red;
+    }
+    .l4Bx {
+        width: 30px;
+        height: 30px;
+        background-color: red;
+    }
+	.l5Bx {
+	  width: 15.5px;
+	  height: 14.5px;
+	  background-color: red;
+	  padding: 0;
+	}
+	.l6Bx {
+	  width: 6.25px;
+	  height: 6.25px;
+	  background-color: red;
+	  padding: 0.4px;
+	  position: relative;
+	  top: 10px;
+	}
+	#scoreDiv {
+	  display: none;
+	  width: 752px;
+	  height: 80px;
+	  margin: 0.25em auto;
+	  padding: 10px;
+	  background-color: #B0A6A6;
+	  border-radius: 1em;
+	  position: relative;
+	  top: 28px;
+	}
+	.box1 {
+	  width: 350px;
+	  height: 35px;
+	  margin: 1px 14px 0 12px;
+	  padding-left: 10px;
+	  background-color: pink;
+	  visibility: visible;
+	  float: left;
+	  padding: 0px;
+	}
+	.box2 {
+	  width: 705px;
+	  height: 20px;
+	  margin: 10px;
+	  background-color: lime;
+	  color: white;
+	  visibility: visible;
+	  float: left;
+	  text-align: center;
+	  padding: 6px;
+	  padding-left: 20px;
+	}
+	table.center {
+		text-align:center;
+		border: 0px solid black;
+		margin: 0 auto; 
+	}
+	#clock {
+	  text-align: center;
+	  margin-top: 10px;
+	  height: 25px;
+	}
+	#demo {
+	  text-align: center;
+	  margin-top: 10px;
+	  height: 25px;
+	}
+	#score {
+	  text-align: center;
+	  margin-top: 2px;
+	  height: 25px;
+	}
+	
+    </style>    
+</head>
+
+<body>
+	<div id="containerDiv">
+		<div id="instrDiv">
+			<p><input id="playLevel" "type="text" placeholder="1-6"  onkeypress="searchKeyPress(event);"/>
+			<button id="playGame" onclick="setupTable()">Lets start</button></p>
+		</div>
+		<div class="gameDiv" id="t2"><table class="center" id="myTable1"></table></div>
+		<div id="scoreDiv"><div class="box1"><p id="clock"></p></div><div class="box1"><p id="demo"></p></div><div class="box2"><p id="score"></p></div></div>
+	</div>
+	<script>
+		var firstTime=true, curBox, lv=0, showTime=0, clickTime=0, clickCounter=0, responseTimeArray = new Array(), myVar=setInterval(function(){myTimer()},1000);
+
+		activeButton="playGame";
+		document.getElementById("playLevel").focus();
+
+		function searchKeyPress(e)
+		{
+			// look for window.event in case event isn't passed in
+			e = e || window.event;
+			if (e.keyCode == 13)
+			{
+				document.getElementById(activeButton).click();
+			}
+		}
+		function showMesg() {
+			if (firstTime) {
+				firstTime=false;
+				startGame();
+			} else {
+				continueGame();
+			}
+		}
+		function continueGame() {
+			var d = new Date();
+			clickTime=d.getTime();
+			responseTimeArray.push((clickTime-showTime)/1000);
+			clickCounter++;
+			hideCurBox();
+			if (clickCounter<10){
+				delay=Math.floor(Math.random()*5000);
+				setTimeout(showRandomBox, delay);
+			} else {
+				document.getElementById("demo").innerHTML = "Game Over!";
+				var avgResp = avgRespTime();
+				document.getElementById("score").innerHTML = "  Average Response Time  =  " + avgResp.toPrecision(5);
+				setTimeout(resetGame, 5000);
+			}
+		}
+		function resetGame() {
+			location.reload();
+		}
+		function setupTable() {
+			document.getElementById("instrDiv").style.display="none";
+			document.getElementById("t2").style.display="block";
+			document.getElementById("scoreDiv").style.display="block";
+			lv=document.getElementById("playLevel").value;
+			var tabSize=Math.pow(2,lv);
+			var table = document.getElementById("myTable1");
+			for (var curRow=0; curRow<tabSize; curRow++){
+				insIntoTable1(table,tabSize,curRow);
+			}
+		}
+		function insIntoTable1(t,n,x) {
+			var row = t.insertRow(0);
+			for (var b=0;b<n;b++){
+			   var c=row.insertCell(b);
+			   var cid=x+"r"+b;
+			   c.className="l"+lv+"Bx";
+			   c.id=cid;
+			   document.getElementById(cid).addEventListener("click", showMesg);
+			}
+		}
+		function startGame() {
+			hideBoard();
+			showbox();
+		}
+		function hideBoard() {
+			var rx=Math.pow(2,lv);
+			var cx=Math.pow(2,lv);
+			var cel="";
+			for (var r=0; r<rx; r++) {
+				for (var c=0; c<cx; c++) {
+					cel=r+"r"+c;
+					document.getElementById(cel).style.visibility="hidden";
+				}
+			}
+		}
+		function showbox() {
+			curBox=document.getElementById("0r1");
+			curBox.style.visibility="visible";
+			var d = new Date();
+			showTime=d.getTime();
+		}
+		function hideCurBox() {
+			curBox.style.visibility="hidden";
+		}
+		function showRandomBox() {
+			var rx=Math.floor(Math.random()*Math.pow(2,lv));
+			var cx=Math.floor(Math.random()*Math.pow(2,lv));
+			var el=rx+"r"+cx;
+			curBox=document.getElementById(el);
+			curBox.style.visibility="visible";
+			var d = new Date();
+			showTime=d.getTime();
+		}
+		function myTimer() {
+			var d = new Date();
+			document.getElementById("clock").innerHTML = d.toLocaleTimeString();
+		}
+		function avgRespTime() {
+			var avg=0;
+			for (var z=1;z<responseTimeArray.length;z++) {
+				avg=avg+responseTimeArray[z];
+			}
+			avg=avg/(responseTimeArray.length - 1);
+			return(avg);
+		}
+	</script>
+</body>
+</html>
