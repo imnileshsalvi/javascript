@@ -185,14 +185,18 @@
 			location.reload();
 		}
 		function setupTable() {
-			document.getElementById("instrDiv").style.display="none";
-			document.getElementById("t2").style.display="block";
-			document.getElementById("scoreDiv").style.display="block";
 			lv=document.getElementById("playLevel").value;
-			var tabSize=Math.pow(2,lv);
-			var table = document.getElementById("myTable1");
-			for (var curRow=0; curRow<tabSize; curRow++){
-				insIntoTable1(table,tabSize,curRow);
+			if ((isNaN(lv))||(lv<1)||(lv>6)) {
+				alert("enter a number between 1-6");
+			} else {
+				document.getElementById("instrDiv").style.display="none";
+				document.getElementById("t2").style.display="block";
+				document.getElementById("scoreDiv").style.display="block";
+				var tabSize=Math.pow(2,lv);
+				var table = document.getElementById("myTable1");
+				for (var curRow=0; curRow<tabSize; curRow++){
+					insIntoTable1(table,tabSize,curRow);
+				}
 			}
 		}
 		function insIntoTable1(t,n,x) {
@@ -204,10 +208,11 @@
 			   c.id=cid;
 			   document.getElementById(cid).addEventListener("click", showMesg);
 			}
+			document.getElementById("demo").innerHTML = "Click any Red tile to begin!";
 		}
 		function startGame() {
 			hideBoard();
-			showbox();
+			showRandomBox();
 		}
 		function hideBoard() {
 			var rx=Math.pow(2,lv);
