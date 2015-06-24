@@ -26,7 +26,7 @@
         width: 700px;
         height: 200px;
 	}
-	#t2 {
+	#gameDiv1 {
 	  display: none;
 	  width: 550px;
 	  height: 550px;
@@ -129,25 +129,39 @@
 	  margin-top: 2px;
 	  height: 25px;
 	}
-	
+	.resizedTextbox {
+		width: 40px;
+	}
     </style>    
 </head>
 
 <body>
 	<div id="containerDiv">
 		<div id="instrDiv">
-			<p><input id="playLevel" "type="text" placeholder="1-6"  onkeypress="searchKeyPress(event);"/>
-			<button id="playGame" onclick="setupTable()">Lets start</button></p>
+			<h2>Superb Game Series: Response Time Challenge</h2>
+			<p>This simple game was designed to display how various factors affect the response time.</p>
+			<p>The challenge is simple: Click the Red Tile as soon as it is displayed. The sooner you click, the better is the response time.</p>
+			<p>At the 1st level you will start with 4 tiles and as the levels increase, the tiles will be further divided into 4 each.</p>
+			<p>To begin the game enter your patience level between 5 and 10. Then click the Play button or simply press the Enter key</p>
+			<!--<p><input id="playLevel" type="text" value="1"  onkeypress="searchKeyPress(event);"/ -->
+			<p>My patience level is <input id="numClicks" type="text" placeholder="2-10" class="resizedTextbox" onkeypress="searchKeyPress(event);"></p>
+			<p><button id="playGame" onclick="setupTable()">Play</button></p>
+			<p> Level 1 has 4 tiles </p>
+			<p> Level 2 has 16 tiles </p>
+			<p> Level 3 has 64 tiles </p>
+			<p> Level 4 has 256 tiles </p>
+			<p> Level 5 has 1024 tiles </p>
+			<p> Level 6 has 4096 tiles </p>
 		</div>
-		<div class="gameDiv" id="t2"><table class="center" id="myTable1"></table></div>
+		<div class="gameDiv" id="gameDiv1"><table class="center" id="myTable1"></table></div>
 		<div id="scoreDiv"><div class="box1"><p id="clock"></p></div><div class="box1"><p id="demo"></p></div><div class="box2"><p id="score"></p></div></div>
 	</div>
 	<script>
-		var firstTime=true, curBox, lv=0, showTime=0, clickTime=0, clickCounter=0, responseTimeArray = new Array(), myVar=setInterval(function(){myTimer()},1000);
-
-		activeButton="playGame";
-		document.getElementById("playLevel").focus();
-
+		var firstTime=true, curBox, level=1, showTime=0, clickTime=0, clickCounter=0, responseTimeArray = new Array(), myVar=setInterval(function(){myTimer()},1000), patienceLevel=5, timesClicked=0;
+		
+		var activeButton="playGame";
+		document.getElementById("numClicks").focus();
+		
 		function searchKeyPress(e)
 		{
 			// look for window.event in case event isn't passed in
@@ -157,89 +171,92 @@
 				document.getElementById(activeButton).click();
 			}
 		}
-		function showMesg() {
-			if (firstTime) {
-				firstTime=false;
-				startGame();
+		function tileClicked() {
+			//document.getElementById("demo").innerHTML = timesClicked+"?"+patienceLevel;
+			if (timesClicked<patienceLevel) {
+				if (firstTime==true) {
+				    document.getElementById("demo").innerHTML = "Level "+level+" about to start";
+					firstTime=false;
+					timesClicked++;
+					curBox.style.visibility="hidden";
+					delay=Math.floor(Math.random()*5000);
+					setTimeout(showRandomBox, delay);
+				} else {
+				    document.getElementById("demo").innerHTML = "Level "+level+" in progress";
+					timesClicked++;
+					var d = new Date();
+					clickTime=d.getTime();
+					responseTimeArray.push((clickTime-showTime)/1000);
+					curBox.style.visibility="hidden";
+					delay=Math.floor(Math.random()*5000);
+					setTimeout(showRandomBox, delay);
+				}
 			} else {
-				continueGame();
+				if (timesClicked==patienceLevel) {
+					if (level == 6) {
+						curBox.style.visibility="hidden";
+						document.getElementById("demo").innerHTML = "Game over! Press F5 key to restart";
+						var avgResp = avgRespTime();
+						document.getElementById("score").innerHTML = "  Average Response Time  =  " + avgResp.toPrecision(5);
+					} else {
+						document.getElementById("demo").innerHTML = "Well done. Level "+level+" challenge completed!";
+						var avgResp = avgRespTime();
+						document.getElementById("score").innerHTML = "Your average response time with " + patienceLevel + " clicks per level was " + avgResp.toPrecision(5);
+						clearTable();
+						level++;
+						timesClicked=1;
+						setupTable();
+					}
+				}
 			}
-		}
-		function continueGame() {
-			var d = new Date();
-			clickTime=d.getTime();
-			responseTimeArray.push((clickTime-showTime)/1000);
-			clickCounter++;
-			hideCurBox();
-			if (clickCounter<10){
-				delay=Math.floor(Math.random()*5000);
-				setTimeout(showRandomBox, delay);
-			} else {
-				document.getElementById("demo").innerHTML = "Game Over!";
-				var avgResp = avgRespTime();
-				document.getElementById("score").innerHTML = "  Average Response Time  =  " + avgResp.toPrecision(5);
-				setTimeout(resetGame, 5000);
-			}
-		}
-		function resetGame() {
-			location.reload();
 		}
 		function setupTable() {
-			lv=document.getElementById("playLevel").value;
-			if ((isNaN(lv))||(lv<1)||(lv>6)) {
-				alert("enter a number between 1-6");
-			} else {
+			patienceLevel=document.getElementById("numClicks").value;
+			//document.getElementById("score").innerHTML = "  patienceLevel = "+patienceLevel;
+			if (((isNaN(patienceLevel))||(patienceLevel<2)||(patienceLevel>10))&& (firstTime==true)) {
+					alert ("you did not select a number between 5 and 10. So we go with 5");
+			}
+			if (firstTime==true) {
 				document.getElementById("instrDiv").style.display="none";
-				document.getElementById("t2").style.display="block";
+				document.getElementById("gameDiv1").style.display="block";
 				document.getElementById("scoreDiv").style.display="block";
-				var tabSize=Math.pow(2,lv);
-				var table = document.getElementById("myTable1");
-				for (var curRow=0; curRow<tabSize; curRow++){
-					insIntoTable1(table,tabSize,curRow);
+				insertRows();
+				setTimeout(showRandomBox, 1);
+				document.getElementById("demo").innerHTML = "Click the Red tile to begin!";
+			} else {
+				insertRows();
+				delay=Math.floor(Math.random()*5000);
+				setTimeout(showRandomBox, delay);
+			}
+		}
+		function clearTable() {
+			var myTable = document.getElementById("myTable1");
+			for (var i=0; i<Math.pow(2,level); i++) {
+				myTable.deleteRow(0);
+			}
+		}
+		function insertRows() {
+			var myTable=document.getElementById("myTable1");
+			for (var rx=0; rx<Math.pow(2,level); rx++) {
+				var row=myTable.insertRow(0);
+				for (var cx=0; cx<Math.pow(2,level); cx++) {
+					var cell=row.insertCell(cx);
+					var cid=rx+"r"+cx;
+					cell.className="l"+level+"Bx";
+					cell.id=cid;
+					document.getElementById(cid).addEventListener("click", tileClicked);
+					document.getElementById(cid).style.visibility="hidden";
+					curBox=document.getElementById(cid);
 				}
 			}
-		}
-		function insIntoTable1(t,n,x) {
-			var row = t.insertRow(0);
-			for (var b=0;b<n;b++){
-			   var c=row.insertCell(b);
-			   var cid=x+"r"+b;
-			   c.className="l"+lv+"Bx";
-			   c.id=cid;
-			   document.getElementById(cid).addEventListener("click", showMesg);
-			}
-			document.getElementById("demo").innerHTML = "Click any Red tile to begin!";
-		}
-		function startGame() {
-			hideBoard();
-			showRandomBox();
-		}
-		function hideBoard() {
-			var rx=Math.pow(2,lv);
-			var cx=Math.pow(2,lv);
-			var cel="";
-			for (var r=0; r<rx; r++) {
-				for (var c=0; c<cx; c++) {
-					cel=r+"r"+c;
-					document.getElementById(cel).style.visibility="hidden";
-				}
-			}
-		}
-		function showbox() {
-			curBox=document.getElementById("0r1");
-			curBox.style.visibility="visible";
-			var d = new Date();
-			showTime=d.getTime();
-		}
-		function hideCurBox() {
-			curBox.style.visibility="hidden";
 		}
 		function showRandomBox() {
-			var rx=Math.floor(Math.random()*Math.pow(2,lv));
-			var cx=Math.floor(Math.random()*Math.pow(2,lv));
-			var el=rx+"r"+cx;
-			curBox=document.getElementById(el);
+			var rx=Math.floor(Math.random()*Math.pow(2,level));
+			var cx=Math.floor(Math.random()*Math.pow(2,level));
+			var cell=rx+"r"+cx;
+			curBox=document.getElementById(cell);
 			curBox.style.visibility="visible";
+			//alert("showing box :"+cell);
 			var d = new Date();
 			showTime=d.getTime();
 		}
@@ -249,10 +266,11 @@
 		}
 		function avgRespTime() {
 			var avg=0;
-			for (var z=1;z<responseTimeArray.length;z++) {
+			for (var z=0;z<responseTimeArray.length;z++) {
+				//console.log(responseTimeArray[z]);
 				avg=avg+responseTimeArray[z];
 			}
-			avg=avg/(responseTimeArray.length - 1);
+			avg=avg/(responseTimeArray.length);
 			return(avg);
 		}
 	</script>
